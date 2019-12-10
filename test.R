@@ -42,9 +42,14 @@ for(i in 1:nrow(df)){
   x <- c(df[i,1],df[i,13],df[i,12],df[i,11],df[i,10],df[i,9],df[i,8],df[i,7],df[i,6],df[i,5],df[i,4])
   y <- c(0,10,20,30,40,50,60,70,80,90,100)
   print(df[i,14])
+  if(sum[1,1] < 0.8){
+    p <- 0.88
+  }else{
+    p <- sum[1,1]
+  }
   jpeg(file = paste('./plots/',gsub(":|\"|[*]","",df[i,14]),'.jpeg',sep=''))
     plot(x,y,main=df[i,14])
-    FUN <- function(x){ return (prefix(x) * each(x)^1.175) }
+    FUN <- function(x){ return (prefix(x) * each(x)^p) }
     plot(FUN, df[i,1],df[i,4], add=T)
   dev.off()
 }
